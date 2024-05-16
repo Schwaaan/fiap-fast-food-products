@@ -29,26 +29,26 @@ namespace FourSix.WebApi.Modules
             services.AddStackExchangeRedisCache(options =>
             {
                 options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions();
-                options.ConfigurationOptions.AbortOnConnectFail = false;
+                //options.ConfigurationOptions.AbortOnConnectFail = false;
                 options.ConfigurationOptions.AllowAdmin = true;
-                options.ConfigurationOptions.Ssl = true;
+                //options.ConfigurationOptions.Ssl = true;
                 options.ConfigurationOptions.SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13;
                 options.ConfigurationOptions.EndPoints.Add(ReadDefaultConnectionStringFromAppSettings("CacheModule:RedisConnection"));
 
-                options.ConfigurationOptions.CertificateValidation += (sender, certificate, chain, sslPolicyErrors) =>
-                {
-                    if (sslPolicyErrors == SslPolicyErrors.None)
-                    {
-                        return true;
-                    }
+                //options.ConfigurationOptions.CertificateValidation += (sender, certificate, chain, sslPolicyErrors) =>
+                //{
+                //    if (sslPolicyErrors == SslPolicyErrors.None)
+                //    {
+                //        return true;
+                //    }
 
-                    if (sslPolicyErrors == SslPolicyErrors.RemoteCertificateNameMismatch)
-                    {
-                        return true;
-                    }
+                //    if (sslPolicyErrors == SslPolicyErrors.RemoteCertificateNameMismatch)
+                //    {
+                //        return true;
+                //    }
 
-                    return false;
-                };
+                //    return false;
+                //};
             }
             );
 

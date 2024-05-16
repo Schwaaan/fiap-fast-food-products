@@ -2,8 +2,10 @@
 
 namespace FourSix.Test.Produtos
 {
-    public class UnitTest
+    public class DomainUnitTest
     {
+        #region [ Classe Produto ]
+
         [Fact]
         public void Cria_classe_produto_ok()
         {
@@ -29,6 +31,7 @@ namespace FourSix.Test.Produtos
             Assert.Equal(ativo, produto.Ativo);
         }
 
+        [Fact]
         public void Inativar_produto_ok()
         {
             Guid id = Guid.NewGuid();
@@ -49,5 +52,23 @@ namespace FourSix.Test.Produtos
 
             Assert.False(produto.Ativo);
         }
+
+        #endregion
+
+        #region [ Métodos privados ]
+
+        private Produto MontarClasseProduto(Guid? id = null, string? nome = null, string? descricao = null, EnumCategoriaProduto? categoria = null, decimal? preco = null, bool? ativo = null)
+        {
+            id ??= Guid.NewGuid();
+
+            return new(id.Value,
+                nome ?? "Teste de produto",
+                descricao ?? "Produto de teste sendo testado com descricao",
+                categoria != null ? categoria.Value : EnumCategoriaProduto.Lanche,
+                preco ?? 10.90M,
+                ativo ?? true);
+        }
+
+        #endregion
     }
 }

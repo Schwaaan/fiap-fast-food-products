@@ -34,15 +34,9 @@ namespace FourSix.UseCases.UseCases.Produtos.AlteraProduto
                 throw new Exception("Produto já existe com esse nome e categoria");
             }
 
-            await _produtoRepository
-                 .Alterar(produto)
-                 .ConfigureAwait(false);
+            await _produtoRepository.Alterar(produto);
 
-            await _unitOfWork
-                .Save()
-            .ConfigureAwait(false);
-
-            produto = _produtoRepository.Listar(q => q.Id == produto.Id).FirstOrDefault();
+            await _unitOfWork.Save();
 
             return produto;
         }
