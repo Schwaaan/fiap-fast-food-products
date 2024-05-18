@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sqlserver-deployment
+  name: sqlserver-product-deployment
   labels:
-    app: sqlserver-deployment
+    app: sqlserver-product-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mssql
+      app: productmssql
   template:
     metadata:
       labels:
-        app: mssql
+        app: productmssql
     spec:
       containers:
-      - name: mssql
+      - name: productmssql
         image: mcr.microsoft.com/mssql/server:2022-latest
         ports:
           - containerPort: 1433
@@ -25,9 +25,9 @@ spec:
         - name: ACCEPT_EULA
           value: "Y"
         volumeMounts:
-        - name: mssqldb
+        - name: productmssqldb
           mountPath: /var/opt/mssql/data
       volumes:
-      - name: mssqldb
+      - name: productmssqldb
         persistentVolumeClaim:
-          claimName: mssql-pvc
+          claimName: mssql-product-pvc
