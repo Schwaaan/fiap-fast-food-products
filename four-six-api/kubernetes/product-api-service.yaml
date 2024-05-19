@@ -8,7 +8,7 @@ spec:
   selector:
     app: foursix-product-deployment
   ports:
-  - port: 30001
+  - port: 30010
     protocol: TCP
     targetPort: 80
   type: LoadBalancer
