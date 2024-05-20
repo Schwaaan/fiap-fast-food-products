@@ -1,4 +1,5 @@
 ------------VOLUME------------
+kubectl apply -f product-pv-volume.yaml
 kubectl apply -f product-pv-claim.yaml
 
 ----------SQL SERVER----------
