@@ -19,6 +19,3 @@ spec:
         image: ivangomesneto/four-six-product-api:latest
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            cpu: 50m
