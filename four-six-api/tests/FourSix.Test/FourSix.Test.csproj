@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\FourSix.Controllers\FourSix.Controllers.csproj" />
     <ProjectReference Include="..\..\src\FourSix.UseCases\FourSix.UseCases.csproj" />
   </ItemGroup>
 

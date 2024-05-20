@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-product-deployment
+  labels:
+    app: redis-product-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-product
+  template:
+    metadata:
+      labels:
+        app: redis-product
+    spec:
+      containers:
+      - name: redis-product
+        image: redis
+        ports:
+          - containerPort: 6379

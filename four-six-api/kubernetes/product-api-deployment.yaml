@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foursix-product-deployment
+  labels:
+    app: foursix-product-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: foursix-product-deployment
+  template:
+    metadata:
+      labels:
+        app: foursix-product-deployment
+    spec:
+      containers:
+      - name: c-foursix-product-deployment
+        image: ivangomesneto/four-six-product-api:latest
+        ports:
+        - containerPort: 80

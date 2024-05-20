@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: productsqlserver
+  name: foursixproductsql
+spec:
+  selector:
+    app: productmssql
+  ports:
+  - port: 1435
+    protocol: TCP
+    targetPort: 1433
+  type: LoadBalancer

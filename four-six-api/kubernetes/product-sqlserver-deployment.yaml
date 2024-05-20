@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlserver-product-deployment
+  labels:
+    app: sqlserver-product-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productmssql
+  template:
+    metadata:
+      labels:
+        app: productmssql
+    spec:
+      containers:
+      - name: productmssql
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        ports:
+          - containerPort: 1433
+        env:
+        - name: MSSQL_SA_PASSWORD
+          value: 'SenhaDoBanco(123)'
+        - name: ACCEPT_EULA
+          value: "Y"
+        #volumeMounts:
+        #- name: productmssqldb
+        #  mountPath: /var/opt/mssql/data
+      #volumes:
+      #- name: productmssqldb
+      #  persistentVolumeClaim:
+      #    claimName: mssql-product-pvc

@@ -3,6 +3,7 @@ using FourSix.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
 
 namespace FourSix.Controllers.Gateways.Repositories.Cache
 {
