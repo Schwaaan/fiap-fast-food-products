@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kubernetes", "kubernetes", 
 		four-six-api\kubernetes\product-api-deployment.yaml = four-six-api\kubernetes\product-api-deployment.yaml
 		four-six-api\kubernetes\product-api-service.yaml = four-six-api\kubernetes\product-api-service.yaml
 		four-six-api\kubernetes\product-pv-claim.yaml = four-six-api\kubernetes\product-pv-claim.yaml
+		product-pv-volume.yaml = product-pv-volume.yaml
 		four-six-api\kubernetes\product-redis-deployment.yaml = four-six-api\kubernetes\product-redis-deployment.yaml
 		four-six-api\kubernetes\product-redis-service.yaml = four-six-api\kubernetes\product-redis-service.yaml
 		four-six-api\kubernetes\product-sqlserver-deployment.yaml = four-six-api\kubernetes\product-sqlserver-deployment.yaml
