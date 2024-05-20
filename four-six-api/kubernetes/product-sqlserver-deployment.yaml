@@ -27,7 +27,7 @@ spec:
         #volumeMounts:
         #- name: productmssqldb
         #  mountPath: /var/opt/mssql/data
-      #volumes:
-      #- name: productmssqldb
-      #  persistentVolumeClaim:
-      #    claimName: mssql-product-pvc
+      volumes:
+      - name: productmssqldb
+        persistentVolumeClaim:
+          claimName: mssql-product-pvc

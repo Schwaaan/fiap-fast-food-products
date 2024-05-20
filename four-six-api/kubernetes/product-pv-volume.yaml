@@ -12,3 +12,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   accessModes:
     - ReadWriteOnce
+  hostPath:
+    path: "/var/opt/mssql/data"
