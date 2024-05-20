@@ -57,12 +57,12 @@ jobs:
       run: | 
           aws eks --region us-east-1 update-kubeconfig --name Fiap-FourSix
           kubectl delete all --all
-          kubectl apply -f product-pv-claim.yaml
-          kubectl apply -f product-sqlserver-deployment.yaml
-          kubectl apply -f product-redis-deployment.yaml
-          kubectl apply -f product-redis-service.yaml
-          kubectl apply -f product-api-deployment.yaml
-          kubectl apply -f product-api-service.yaml
+          kubectl apply -f four-six-api/kubernetes/product-pv-claim.yaml
+          kubectl apply -f four-six-api/kubernetes/product-sqlserver-deployment.yaml
+          kubectl apply -f four-six-api/kubernetes/product-redis-deployment.yaml
+          kubectl apply -f four-six-api/kubernetes/product-redis-service.yaml
+          kubectl apply -f four-six-api/kubernetes/product-api-deployment.yaml
+          kubectl apply -f four-six-api/kubernetes/product-api-service.yaml
 
         
   
