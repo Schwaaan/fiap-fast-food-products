@@ -1,6 +1,7 @@
 ﻿using FourSix.Controllers.Gateways.Configurations;
 using FourSix.Domain.Entities.ProdutoAggregate;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FourSix.Controllers.Gateways.DataAccess
 {

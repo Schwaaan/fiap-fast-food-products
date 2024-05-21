@@ -1,10 +1,10 @@
-﻿using FourSix.Controllers.Gateways.Repositories;
+﻿using FourSix.Controllers.Gateways.Configurations;
+using FourSix.Controllers.Gateways.DataAccess;
+using FourSix.Controllers.Gateways.Repositories;
+using FourSix.Controllers.Gateways.Repositories.Cache;
 using FourSix.Domain.Entities.ProdutoAggregate;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Moq;
 
 namespace FourSix.Test.Produtos
@@ -19,6 +19,8 @@ namespace FourSix.Test.Produtos
             dbContextMock = new();
             dbSetMock = new();
         }
+
+        #region [ Produto ]
 
         [Fact]
         public void Obter_resultado_ok()
@@ -41,67 +43,83 @@ namespace FourSix.Test.Produtos
         public async Task Incluir_produto_ok()
         {
             // Arrange
+            var produtos = new List<Produto> { MontarClasseProduto() };
+            var produtoIncluir = produtos.FirstOrDefault();
             var repository = new ProdutoRepository(dbContextMock.Object);
-            var produto = MontarClasseProduto();
-            dbContextMock.Setup(m => m.Set<Produto>()).Returns(dbSetMock.Object);
+
+            var mockSet = new Mock<DbSet<Produto>>();
+
+            dbContextMock.Setup(c => c.Set<Produto>()).Returns(mockSet.Object);
+
 
             // Act
-            await repository.Incluir(produto);
+            await repository.Incluir(produtoIncluir);
+            var _unitOfWork = new UnitOfWork(dbContextMock.Object);
+            await _unitOfWork.Save();
 
             // Assert
-            dbSetMock.Verify(m => m.AddAsync(It.IsAny<Produto>(), CancellationToken.None), Times.Once);
+            mockSet.Verify(m => m.AddAsync(It.IsAny<Produto>(), CancellationToken.None), Times.Once);
         }
 
-        //[Fact]
-        //public async Task Excluir_Sets_Entity_State_Deleted()
-        //{
-        //    // Arrange
-        //    var setId = Guid.NewGuid();
-        //    var produto = MontarClasseProduto();
-        //    dbSetMock.Setup(m => m.FindAsync(setId)).ReturnsAsync(produto);
-        //    dbContextMock.Setup(m => m.Set<Produto>()).Returns(dbSetMock.Object);
-        //    dbContextMock.Setup(m => m.Entry(produto).State).Returns(EntityState.Deleted);
+        #endregion
 
-        //    var iStateManager = new Mock<IStateManager>();
-        //    var model = new Mock<Model>();
+        #region [ Configuration ]
 
-        //    var entityEntryMock = new Mock<EntityEntry<Produto>>();
+        [Fact]
+        public void Produto_configuration_erro()
+        {
+            // Arrange
+            var produtoConfiguration = new ProdutoConfiguration();
 
-        //    //var productEntityEntry = new Mock<EntityEntry<Produto>>();
-        //    //productEntityEntry.SetupGet(m => m.Entity).Returns(produto);
+            // Act
+            Action act = () => produtoConfiguration.Configure(null);
 
-        //    //(        new InternalShadowEntityEntry(iStateManager.Object, new EntityType("Produto", model.Object, true, ConfigurationSource.Convention)));
+            // Assert
+            Assert.Throws<ArgumentNullException>(act);
+        }
+
+        [Fact]
+        public void Produto_configuration_ok()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<ProdutoDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .Options;
+
+            using var context = new ProdutoDbContext(options);
+            var modelBuilder = new ModelBuilder();
+            var produtoConfiguration = new ProdutoConfiguration();
+
+            // Act
+            produtoConfiguration.Configure(modelBuilder.Entity<Produto>());
+
+            // Assert
+            var entityType = modelBuilder.Model.FindEntityType(typeof(Produto));
+            Assert.NotNull(entityType);
+
+            Assert.Equal("Produto", entityType.GetTableName());
+            Assert.Equal(nameof(Produto.Id), entityType.FindPrimaryKey().Properties.First().Name);
+
+            Assert.Equal(50, entityType.FindProperty(nameof(Produto.Nome)).GetMaxLength());
+            Assert.Equal(200, entityType.FindProperty(nameof(Produto.Descricao)).GetMaxLength());
+            Assert.Equal(6, entityType.FindProperty(nameof(Produto.Preco)).GetPrecision());
+            Assert.Equal(2, entityType.FindProperty(nameof(Produto.Preco)).GetScale());
+        }
+
+        [Fact]
+        public void Seed_erro()
+        {
+            // Arrange
 
 
+            // Act
+            Action act = () => SeedData.Seed(null);
 
+            // Assert
+            Assert.Throws<ArgumentNullException>(act);
+        }
 
-        //    var repository = new ProdutoRepository(dbContextMock.Object);
-
-        //    // Act
-        //    await repository.Excluir(setId);
-
-        //    // Assert
-        //    //dbContextMock.Verify(m => m.Entry(produto).State, Times.Once);
-        //    entityEntryMock.VerifySet(m => m.State = EntityState.Deleted, Times.Once);
-        //}
-
-        //[Fact]
-        //public void Listar_Returns_All_Products_When_No_Predicate_Provided()
-        //{
-        //    // Arrange
-        //    var repository = new ProdutoRepository(dbContextMock.Object);
-        //    var produto1 = MontarClasseProduto();
-        //    var produto2 = MontarClasseProduto();
-        //    List<Produto> produtos = new List<Produto> { produto1, produto2 };
-        //    //dbSetMock.Setup(m => m).Returns(produtos.AsQueryable());
-        //    dbContextMock.Setup(m => m.Set<Produto>()).Returns(dbSetMock.Object);
-
-        //    // Act
-        //    var resultado = repository.Listar(null);
-
-        //    // Assert
-        //    Assert.Equal(produtos, resultado);
-        //}
+        #endregion
 
         #region [ Métodos privados ]
 
@@ -118,5 +136,20 @@ namespace FourSix.Test.Produtos
         }
 
         #endregion
+    }
+
+    public class ProdutoDbContext : DbContext
+    {
+        public ProdutoDbContext(DbContextOptions<ProdutoDbContext> options) : base(options)
+        {
+        }
+
+        public DbSet<Produto> Produtos { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            new ProdutoConfiguration().Configure(modelBuilder.Entity<Produto>());
+        }
     }
 }
