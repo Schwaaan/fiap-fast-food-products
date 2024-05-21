@@ -1,4 +1,3 @@
-using FourSix.Controllers.Presenters;
 using FourSix.Controllers.ViewModels;
 using FourSix.UseCases.UseCases.Produtos.NovoProduto;
 using Microsoft.AspNetCore.Http;
@@ -8,14 +7,11 @@ namespace FourSix.Controllers.Adapters.Produtos.NovoProduto
 {
     public class NovoProdutoAdapter : INovoProdutoAdapter
     {
-        private readonly Notification _notification;
         private readonly INovoProdutoUseCase _useCase;
 
-        public NovoProdutoAdapter(Notification notification,
-            INovoProdutoUseCase useCase)
+        public NovoProdutoAdapter(INovoProdutoUseCase useCase)
         {
             this._useCase = useCase;
-            this._notification = notification;
         }
 
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(NovoProdutoResponse))]

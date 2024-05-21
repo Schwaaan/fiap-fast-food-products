@@ -1,5 +1,4 @@
-﻿using FourSix.Controllers.Presenters;
-using FourSix.UseCases.UseCases.Produtos.AlteraProduto;
+﻿using FourSix.UseCases.UseCases.Produtos.AlteraProduto;
 using FourSix.UseCases.UseCases.Produtos.InativaProduto;
 using FourSix.UseCases.UseCases.Produtos.NovoProduto;
 using FourSix.UseCases.UseCases.Produtos.ObtemProduto;
@@ -12,8 +11,6 @@ namespace FourSix.WebApi.Modules
     {
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
-            services.AddScoped<Notification, Notification>();
-
             #region [ Produtos ]
             services.AddScoped<IAlteraProdutoUseCase, AlteraProdutoUseCase>();
             services.AddScoped<INovoProdutoUseCase, NovoProdutoUseCase>();

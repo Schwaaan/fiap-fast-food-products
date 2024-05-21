@@ -1,8 +1,10 @@
 ﻿using FourSix.Domain.Entities.ProdutoAggregate;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FourSix.Controllers.Gateways.DataAccess
 {
+    [ExcludeFromCodeCoverage]
     public static class SeedData
     {
         public static void Seed(ModelBuilder builder)

@@ -3,10 +3,11 @@ using FourSix.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FourSix.Controllers.Gateways.Repositories.Cache
 {
+    [ExcludeFromCodeCoverage]
     public class BaseCacheRepository<T, C> : BaseRepository<T, C> where T : class, IBaseEntity
     {
         private readonly IDistributedCache _distributedCache;
