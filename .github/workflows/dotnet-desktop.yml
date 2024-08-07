@@ -55,9 +55,8 @@ jobs:
         aws-region: us-east-1
     - name: Deploy to EKS
       run: | 
-          aws eks --region us-east-1 update-kubeconfig --name Fiap-FourSix
-          kubectl delete svc api-svc-product-foursix foursixproductsql redis-product
-          kubectl delete deployment foursix-product-deployment sqlserver-product-deployment redis-product-deployment
+          aws eks --region us-east-1 update-kubeconfig --name fiap-foursix
+          kubectl delete deployment foursix-product-deployment sqlserver-product-deployment redis-product-deployment --ignore-not-found=true
           kubectl apply -f four-six-api/kubernetes/product-sqlserver-deployment.yaml
           kubectl apply -f four-six-api/kubernetes/product-sqlserver-service.yaml
           kubectl apply -f four-six-api/kubernetes/product-redis-deployment.yaml
