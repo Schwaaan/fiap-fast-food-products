@@ -39,6 +39,12 @@ kubectl delete pv --all
 
 
 ---------DELETE ALL---------
+kubectl delete deployment -l app=foursix-product-deployment --ignore-not-found=true
+kubectl delete deployment -l app=redis-product-deployment --ignore-not-found=true
+kubectl delete deployment -l app=sqlserver-product-deployment --ignore-not-found=true
+kubectl delete svc -l app=redis-product --ignore-not-found=true
+kubectl delete svc -l app=api-svc-product-foursix --ignore-not-found=true
+kubectl delete svc -l app=productsqlserver --ignore-not-found=true
 kubectl delete all --all
 
 
