@@ -10,9 +10,10 @@
 A FourSix Solutions é um conjunto de APIs desenvolvido para resolver os desafios enfrentados pelo Restaurante FourSix FastFood. Com o objetivo de ampliar seu alcance e melhorar o atendimento ao cliente, foi concebida uma solução de autoatendimento, onde os clientes podem fazer seus pedidos por meio de totens. Esses pedidos são então encaminhados automaticamente para o preparo, proporcionando uma gestão eficiente do fluxo de atendimento de ponta a ponta. Além disso, a solução abrange a administração de clientes e pagamentos, garantindo uma experiência completa e integrada desde a solicitação do pedido até sua conclusão.
 
 # Arquitetura do Projeto
-<p align="center">
-   <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/432f823e-7a3b-47ed-879f-b4507232f235"/>
-</p>
+https://www.notion.so/Arquitetura-60cd5abe29284ddab0fdec98db94882a
+
+# Relatorio OWASP ZAP
+https://github.com/Schwaaan/fiap-fast-food-products/blob/main/documents/ListarCardapio.html
 
 # Video de Apresentação do Projeto
 [![Apresentacao](https://img.youtube.com/vi/VAvbk4zQk-k/0.jpg)](https://www.youtube.com/watch?v=VAvbk4zQk-k)
