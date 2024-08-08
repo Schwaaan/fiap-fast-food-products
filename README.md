@@ -15,8 +15,8 @@ https://www.notion.so/Arquitetura-60cd5abe29284ddab0fdec98db94882a
 # Relatorio OWASP ZAP
 https://github.com/Schwaaan/fiap-fast-food-products/blob/main/documents/ListarCardapio.html
 
-# Video de Apresentação do Projeto
-[![Apresentacao](https://img.youtube.com/vi/VAvbk4zQk-k/0.jpg)](https://www.youtube.com/watch?v=VAvbk4zQk-k)
+# OWASP
+https://www.notion.so/OWASP-fece0a7ad74b44b5ac15a46ab44cb0fc#cc22572f06e149f9992e727e8dc717c8
 
 ## Ferramentas utilizadas
 | <a href="https://learn.microsoft.com/pt-br/dotnet/" target="_blank"> <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/2d89d325-9f3d-4920-b496-dfdc9ff5ded7" alt=".netCore" height="50" /></a> | <a href="https://learn.microsoft.com/pt-br/sql/?view=sql-server-ver16" target="_blank"><img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/4585295d-5064-421e-9652-a5dd1f38622b" alt=".netCore"  height="50"/></a> | <a href="https://docs.docker.com/manuals/" target="_blank"> <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/238b190a-67b1-4002-9d1d-23fe34e2bc7f" alt=".netCore" height="50"/></a> | <a href="https://kubernetes.io/pt-br/docs/home/" target="_blank"> <img src="https://github.com/Schwaaan/fiap-fast-food/assets/11160318/30c37852-b6ff-414a-9b59-0b4f5b5d499a" alt=".netCore" height="50"/></a>
